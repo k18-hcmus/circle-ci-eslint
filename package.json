@@ -1,0 +1,22 @@
+{
+  "name": "circleci",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node .",
+    "lint": "eslint --fix --ext .js,.jsx ."
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "eslint": "^8.6.0"
+  },
+  "dependencies": {
+    "eslint-cli": "^1.1.1",
+    "express": "^4.17.2",
+    "global": "^4.4.0"
+  }
+}
