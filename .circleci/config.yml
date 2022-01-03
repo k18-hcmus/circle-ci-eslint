@@ -1,6 +1,7 @@
 version: 2.1
 orbs:
   node: circleci/node@3.0.0
+  heroku: circleci/heroku@1.2.6
 jobs:
   build:
     docker:
@@ -19,7 +20,7 @@ jobs:
           - v1-dependencies-{{ checksum "yarn.lock" }}
           # fallback to using the latest cache if no exact match is found
           - v1-dependencies-
-      - run: npm install -g yarn
+      - run: sudo npm install -g yarn
       - run: yarn install
       # lưu lại cache folder theo key nếu như (yarn.lock) có sự thay đổi
       - save_cache:
@@ -29,15 +30,15 @@ jobs:
       - run: yarn lint
 
   deploy:
-    machine:
-      enabled: true
+    executor: heroku/default
     steps:
-      - add_ssh_keys:
-          fingerprints:
-            - "76:8d:4d:4c:2c:db:3f:0d:a6:6e:5a:42:f4:dc:c5:23"
+      - checkout
+      - heroku/install
       - run:
-          name: pull code and start api_services
-          command: ssh -oStrictHostKeyChecking=no root@42.112.27.32 -p 22287 "cd /home/todo_typescript; git pull origin master; npm run install-npm; npm run dev"
+          command: >
+            echo "The command above installs Heroku, the command below deploys.
+            What you do inbetween is up to you!"
+      - heroku/deploy-via-git
 
 workflows:
   my-flow:
