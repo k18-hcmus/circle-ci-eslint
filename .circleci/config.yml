@@ -20,7 +20,7 @@ jobs:
           - v1-dependencies-{{ checksum "yarn.lock" }}
           # fallback to using the latest cache if no exact match is found
           - v1-dependencies-
-      - run: sudo npm install -g yarn
+      - run: npm install yarn
       - run: yarn install
       # lưu lại cache folder theo key nếu như (yarn.lock) có sự thay đổi
       - save_cache:
