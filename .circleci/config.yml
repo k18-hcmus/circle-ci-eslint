@@ -33,4 +33,10 @@ workflows:
   my-flow:
       jobs:
         - build
-        - heroku/deploy-via-git
+        - heroku/deploy-via-git:
+            requires:
+              - build
+            filters:
+              branches:
+                only:
+                  - master
